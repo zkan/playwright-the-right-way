@@ -1,17 +1,20 @@
 import { test, expect } from '@playwright/test';
+import { CartPage } from '../pages/cart.page'
 import { LoginPage } from '../pages/login.page'
+import { ProductPage } from '../pages/product.page'
 
 test('Customer purchases products', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto()
   await loginPage.login('customer1', 'password')
 
-  await test.step('Add to cart', async () => {
-    await page.getByTestId('add-to-cart-button').first().click();
-    await page.getByTestId('add-to-cart-button').nth(1).click();
-    await page.getByTestId('cart').click();
-    await expect(page.getByTestId('subtotal-price-container').getByText('285.89THB')).toBeVisible();
-  })
+  const productPage = new ProductPage(page)
+  await productPage.addToCartButton.first().click();
+  await productPage.addToCartButton.nth(1).click();
+  await productPage.cartButton.click();
+
+  const cartPage = new CartPage(page)
+  await expect(cartPage.subTotalPrice.getByText('285.89THB')).toBeVisible()
 
   await test.step('Checkout', async () => {
     await page.getByTestId('checkout-button').click();
