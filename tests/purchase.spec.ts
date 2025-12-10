@@ -49,5 +49,4 @@ test('Customer purchases products', async ({ page }) => {
   await page.locator('form').getByRole('button').click();
   await page.getByRole('button', { name: ' Delete all' }).click();
   await page.getByRole('button', { name: 'Delete', exact: true }).click();
-
 });
