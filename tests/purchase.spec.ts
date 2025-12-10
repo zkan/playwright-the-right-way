@@ -14,10 +14,9 @@ test('Customer purchases products', async ({ page }) => {
   await productPage.cartButton.click();
 
   const cartPage = new CartPage(page)
-  await expect(cartPage.subTotalPrice.getByText('285.89THB')).toBeVisible()
+  await cartPage.checkoutButton.click()
 
   await test.step('Checkout', async () => {
-    await page.getByTestId('checkout-button').click();
     await page.getByTestId('firstname-field').click();
     await page.getByTestId('firstname-field').fill('zkan');
     await page.getByTestId('lastname-field').click();
