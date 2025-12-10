@@ -2,11 +2,9 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page'
 
 test('Customer purchases products', async ({ page }) => {
-  await test.step('Login', async () => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto()
-    await loginPage.login('customer1', 'password')
-  })
+  const loginPage = new LoginPage(page);
+  await loginPage.goto()
+  await loginPage.login('customer1', 'password')
 
   await test.step('Add to cart', async () => {
     await page.getByTestId('add-to-cart-button').first().click();
