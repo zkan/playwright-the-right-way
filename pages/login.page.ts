@@ -7,6 +7,7 @@ export class LoginPage {
     this.page = page;
     this.loginField = page.getByTestId('login-field')
     this.passwordField = page.getByTestId('password-field')
+    this.loginButton = page.getByTestId('submit-button')
   }
 
   async goto() {
@@ -16,6 +17,6 @@ export class LoginPage {
   async login() {
     await this.loginField.fill('customer1')
     await this.passwordField.fill('password')
-    await this.page.getByTestId('submit-button').click()
+    await this.loginButton.click()
   }
 }
