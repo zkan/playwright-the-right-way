@@ -1,12 +1,17 @@
 import { test, expect } from '@playwright/test';
+import { CartPage } from '../pages/cart.page'
+import { LoginPage } from '../pages/login.page'
+import { ProductPage } from '../pages/product.page'
 
 test('Customer sees empty cart when not adding any product to cart', async ({ page }) => {
-  await page.goto('https://merchandise-dev.odds.team')
-  await page.getByTestId('login-field').click();
-  await page.getByTestId('login-field').fill('customer1');
-  await page.getByTestId('password-field').fill('password');
-  await page.getByTestId('submit-button').click();
+  const loginPage = new LoginPage(page)
+  await loginPage.goto()
+  await loginPage.login('customer1', 'password')
 
-  await page.getByTestId('cart').click();
-  await expect(page.getByTestId('empty-cart-container')).toBeVisible();
+  const productPage = new ProductPage(page)
+  productPage.cartButton.click()
+
+  const cartPage = new CartPage(page)
+  await expect(cartPage.emptyCartContainer).toBeVisible()
+  await expect(cartPage.emptyCartContainer).toHaveText('No item in cart.')
 });
