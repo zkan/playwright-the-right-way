@@ -5,7 +5,7 @@ test('Customer purchases products', async ({ page }) => {
   await test.step('Login', async () => {
     const loginPage = new LoginPage(page);
     await loginPage.goto()
-    await loginPage.login()
+    await loginPage.login('customer1', 'password')
   })
 
   await test.step('Add to cart', async () => {
