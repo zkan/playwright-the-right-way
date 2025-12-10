@@ -1,13 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/login.page'
 
 test('Customer purchases products', async ({ page }) => {
-  await page.goto('https://merchandise-dev.odds.team')
-
   await test.step('Login', async () => {
-    await page.getByTestId('login-field').click();
-    await page.getByTestId('login-field').fill('customer1');
-    await page.getByTestId('password-field').fill('password');
-    await page.getByTestId('submit-button').click();
+    const loginPage = new LoginPage(page);
+    await loginPage.goto()
+    await loginPage.login()
   })
 
   await test.step('Add to cart', async () => {
