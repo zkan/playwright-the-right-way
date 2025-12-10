@@ -6,3 +6,6 @@ run = "npx playwright test"
 
 [tasks.report]
 run = "npx playwright show-report"
+
+[tasks.codegen]
+run = "npx playwright codegen https://merchandise-dev.odds.team"
